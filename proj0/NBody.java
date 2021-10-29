@@ -13,22 +13,30 @@ public class NBody {
     }   
 
     public static Planet[] readPlanets(String file){
-        Planet[] ansPlanet = new Planet[5];
+        Planet[] ansPlanet = new Planet[100];
         In in = new In(file);
         in.readInt();
         in.readDouble();
         int cnt = 0;
-        while(cnt < 5) {
-            double xxPos = in.readDouble();
-            double yyPos = in.readDouble();
-            double xxVel = in.readDouble();
-            double yyVel = in.readDouble();
-            double mass  = in.readDouble();
-            String img   = in.readString();
-            ansPlanet[cnt] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, img);
-            cnt ++;
+        while(true) {
+            try {
+                double xxPos = in.readDouble();
+                double yyPos = in.readDouble();
+                double xxVel = in.readDouble();
+                double yyVel = in.readDouble();
+                double mass  = in.readDouble();
+                String img   = in.readString();
+                ansPlanet[cnt] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, img);
+                cnt ++;
+            } catch( Exception e) {
+                break;
+            }
         }
-        return ansPlanet;
+        Planet[] returnPlanets = new Planet[cnt];
+        for(int i = 0; i < cnt; i++) {
+            returnPlanets[i] = ansPlanet[i];
+        }
+        return returnPlanets;
     }
     public static void main(String[] args) {
         if (args.length < 3) {
@@ -52,20 +60,21 @@ public class NBody {
         
 
         // StdDraw.enableDoubleBuffering()
-        double[] XForce = new double[5];
-        double[] YForce = new double[5];
+        int len = planets.length;
+        double[] XForce = new double[len];
+        double[] YForce = new double[len];
 
         double startTime = 0.0;
         // loop update position ... 
 
         StdDraw.enableDoubleBuffering();
         while(Math.abs(startTime - T) > eps * Math.max(startTime, T)) {
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < len; i++) {
                 XForce[i] = planets[i].calcNetForceExertedByX(planets); 
                 YForce[i] = planets[i].calcNetForceExertedByY(planets); 
             }    
 
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < len; i++) {
                 planets[i].update(dt, XForce[i], YForce[i]);
             }
 
