@@ -1,9 +1,11 @@
+import java.security.Identity;
+
 public class LinkedListDeque<DataType> {
 
-    public class Node {
-        public DataType item;
-        public Node prev;
-        public Node succ;
+    private class Node {
+        private DataType item;
+        private Node prev;
+        private Node succ;
     }
 
     private int size;
@@ -13,13 +15,6 @@ public class LinkedListDeque<DataType> {
         this.size = 0;
         this.dummy = new Node();
         dummy.prev = dummy.succ = dummy;
-    }
-
-    public LinkedListDeque(DataType x) {
-        this.size = 0;
-        this.dummy = new Node();
-        dummy.prev = dummy.succ = dummy;
-        addFirst(x);
     }
 
     public void addFirst(DataType x) {
@@ -93,14 +88,43 @@ public class LinkedListDeque<DataType> {
         succ.succ = prev;
         return returnValue;
     }
-    /*
+    
     public DataType get(int index) {
         if (index >= this.size()) {
             return null;
         }
-
-
-        
+        DataType returnValue;
+        if (index < this.size() / 2) {
+            Node start = this.dummy.succ;
+            while(index > 0) {
+                start = start.succ;
+                index -= 1;
+            }
+            returnValue = start.item;
+        } else {
+            index = size - index - 1;
+            Node start = this.dummy.prev;
+            while(index > 0) {
+                start = start.prev;
+                index -= 1;
+            }
+            returnValue = start.item;
+        }
+        return returnValue;
     }
-    */
+
+    private DataType getRecursiveHelper(Node n, int index) {
+        if (index == 0) {
+            return n.item;
+        } else {
+            return getRecursiveHelper(n.succ, index-1);
+        }
+    }
+
+    public DataType getRecursive(int index) {
+        if (index == 0) {
+            return this.dummy.succ.item;
+        }
+        return getRecursiveHelper(this.dummy.succ, index);
+    }
 }

@@ -89,16 +89,11 @@ public class LinkedListDequeTest {
 		//addIsEmptySizeTest();
 		//addRemoveTest();
 		LinkedListDeque <Integer> L = new LinkedListDeque<>();
-		L.addFirst(1);
-		L.addFirst(2);
-		L.addFirst(3);
-		System.out.println(L.size());
-		L.printDeque();	
-		System.out.println(L.removeLast());
-		L.printDeque();
-		L.removeFirst();
-		L.removeFirst();
-		System.out.println(L.size());
-		L.printDeque();
-	}
-} 
+		int i = 0;
+		while(i < 999999) {
+			L.addFirst(i);
+			i ++;
+		}	
+		System.out.println(L.getRecursive(800));	
+	} 
+}
