@@ -13,7 +13,7 @@ public class NBody {
     }   
 
     public static Planet[] readPlanets(String file){
-        Planet[] ansPlanet = new Planet[100];
+        Planet[] ansPlanet = new Planet[1000000];
         In in = new In(file);
         in.readInt();
         in.readDouble();
