@@ -89,13 +89,24 @@ public class LinkedListDequeTest {
 		//addIsEmptySizeTest();
 		//addRemoveTest();
 		ArrayDeque<Integer> A = new ArrayDeque<>();	
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 64; i++) {
 			A.addFirst(0);
 		}
 
-		A.addLast(1);
+		for(int i = 0; i < 47; i++) {
+			A.removeFirst();
+		}
+
+		A.removeFirst();
+		A.removeFirst();
+
 		A.printDeque();
 
-		System.out.println(A.get(7));
+		A.addFirst(8);
+		A.addLast(7);
+		A.removeFirst();
+		A.printDeque();
+
+		System.out.println(A.get(1));
 	} 
 }

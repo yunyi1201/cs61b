@@ -13,12 +13,12 @@ public class ArrayDeque<T> {
         size = head = tail = 0;
     }
 
-    private void resize(int resize) {
+    private void doublesize(int resize) {
         T[] temp = (T []) new Object[resize];
         int p = (tail + 1) % capacity;
         int n = capacity;
         int r = n - p;
-        capacity = n * 2;
+        capacity = resize;
         System.arraycopy(item, p, temp, 0, r);     
         System.arraycopy(item, 0, temp, r, p);
         item = temp;
@@ -26,10 +26,26 @@ public class ArrayDeque<T> {
         head = size;       
     }
 
+    private void downsize(int resize) {
+        T[] temp = (T []) new Object[resize];
+        int oldCapacity = capacity;
+        capacity = resize;
+        if (tail < head) {
+            System.arraycopy(item, tail + 1, temp, 0, size);     
+        } else {
+            int rightSize = oldCapacity - tail - 1;
+            System.arraycopy(item, tail + 1, temp, 0, rightSize);
+            System.arraycopy(item, 0, temp, rightSize, size - rightSize);
+        }
+        item = temp;
+        tail = capacity - 1;
+        head = size;
+    }
+
     /* actual capacity = capacity - 1 */
     public void addFirst(T x) {
         if (size == capacity - 1) {
-            resize(capacity * 2);
+            doublesize(capacity * 2);
         } 
         if (head == tail) {
             tail = (tail - 1 + capacity) % capacity;
@@ -41,7 +57,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T x) {
         if (size == capacity - 1) {
-            resize(capacity * 2);
+            doublesize(capacity * 2);
         }
         if (head == tail) {
             head = (head + 1) % capacity;
@@ -78,7 +94,7 @@ public class ArrayDeque<T> {
         
         /* resize */
         if (capacity >= 16 && size < (capacity / 4)) {
-            resize(capacity / 2);
+            downsize(capacity / 2);
         }
 
         return res;
@@ -95,7 +111,7 @@ public class ArrayDeque<T> {
 
         /* resize */
         if (capacity >= 16 && size < (capacity / 4)) {
-            resize(capacity / 2);
+            downsize(capacity / 2);
         }
 
         return res;
