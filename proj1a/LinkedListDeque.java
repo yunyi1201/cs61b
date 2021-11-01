@@ -1,9 +1,7 @@
-import java.security.Identity;
-
-public class LinkedListDeque<DataType> {
+public class LinkedListDeque<T> {
 
     private class Node {
-        private DataType item;
+        private T item;
         private Node prev;
         private Node succ;
     }
@@ -17,7 +15,7 @@ public class LinkedListDeque<DataType> {
         dummy.prev = dummy.succ = dummy;
     }
 
-    public void addFirst(DataType x) {
+    public void addFirst(T x) {
         Node temp = new Node();
         temp.item = x;
         Node prev = this.dummy;
@@ -31,7 +29,7 @@ public class LinkedListDeque<DataType> {
         this.size += 1;
     }
 
-    public void addLast(DataType x) {
+    public void addLast(T x) {
         Node temp = new Node();
         temp.item = x;
         Node prev = this.dummy.prev;
@@ -59,13 +57,13 @@ public class LinkedListDeque<DataType> {
         }
     }
 
-    public DataType removeFirst() {
+    public T removeFirst() {
         if (this.isEmpty()) {
             return null;
         } 
         this.size -= 1;
         Node deleteNode = this.dummy.succ;
-        DataType returnValue = deleteNode.item;
+        T returnValue = deleteNode.item;
         Node prev = deleteNode.prev;
         Node succ = deleteNode.succ;
         
@@ -74,13 +72,13 @@ public class LinkedListDeque<DataType> {
         return returnValue;
     }
 
-    public DataType removeLast() {
+    public T removeLast() {
         if (this.isEmpty()) {
             return null;
         }
         this.size -= 1;
         Node deleteNode = this.dummy.prev;
-        DataType returnValue = deleteNode.item;
+        T returnValue = deleteNode.item;
         Node prev = deleteNode.succ;
         Node succ = deleteNode.prev;
         
@@ -89,11 +87,11 @@ public class LinkedListDeque<DataType> {
         return returnValue;
     }
     
-    public DataType get(int index) {
+    public T get(int index) {
         if (index >= this.size()) {
             return null;
         }
-        DataType returnValue;
+        T returnValue;
         if (index < this.size() / 2) {
             Node start = this.dummy.succ;
             while(index > 0) {
@@ -113,7 +111,7 @@ public class LinkedListDeque<DataType> {
         return returnValue;
     }
 
-    private DataType getRecursiveHelper(Node n, int index) {
+    private T getRecursiveHelper(Node n, int index) {
         if (index == 0) {
             return n.item;
         } else {
@@ -121,7 +119,7 @@ public class LinkedListDeque<DataType> {
         }
     }
 
-    public DataType getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index == 0) {
             return this.dummy.succ.item;
         }
