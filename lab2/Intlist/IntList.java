@@ -105,6 +105,7 @@ public class IntList {
         if (A == null) {
             return B;
         }
+
         IntList res = new IntList(A.first, null);
         IntList pre = res;
         IntList cur = A.rest;
