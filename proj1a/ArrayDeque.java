@@ -75,6 +75,12 @@ public class ArrayDeque<T> {
         T res = item[head];
         item[head] = null; 
         size -= 1;
+        
+        /* resize */
+        if (capacity >= 16 && size < (capacity / 4)) {
+            resize(capacity / 2);
+        }
+
         return res;
     }
 
@@ -86,6 +92,12 @@ public class ArrayDeque<T> {
         T res = item[tail];
         item[tail] = null;
         size -= 1;
+
+        /* resize */
+        if (capacity >= 16 && size < (capacity / 4)) {
+            resize(capacity / 2);
+        }
+
         return res;
     }
 
