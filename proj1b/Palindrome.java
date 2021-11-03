@@ -1,5 +1,5 @@
 public class Palindrome {
-    public static Deque<Character> wordToDeque(String word) {
+    public Deque<Character> wordToDeque(String word) {
         if (word.length() == 0) {
             return null;
         }
