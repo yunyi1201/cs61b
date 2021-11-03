@@ -27,13 +27,13 @@ public class Palindrome {
         return isPalindromeRecursionHelper(d);
     }
 
-    private static boolean isPalindromeRecursionHelperByOffOne(Deque<Character> word, CharacterComparator cc) {
+    private static boolean isPalindromeRecursionHelperByOffN(Deque<Character> word, CharacterComparator cc) {
         if (word.size() < 2) {
             return true;
         }
         char head = word.removeFirst();
         char tail = word.removeLast();
-        return cc.equalChars(head, tail) && isPalindromeRecursionHelper(word);
+        return cc.equalChars(head, tail) && isPalindromeRecursionHelperByOffN(word, cc);
     }
 
     public boolean isPalindrome(String word, CharacterComparator cc) {
@@ -41,6 +41,6 @@ public class Palindrome {
             return true;
         }
         Deque<Character> d = wordToDeque(word);
-        return isPalindromeRecursionHelperByOffOne(d, cc);
+        return isPalindromeRecursionHelperByOffN(d, cc);
     }
 }

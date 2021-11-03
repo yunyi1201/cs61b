@@ -31,6 +31,15 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("aab", offByOne));
     }
 
+    @Test
+    public void testIspalindromeByN() {
+        CharacterComparator offByN = new OffByN(3);
+        assertTrue(palindrome.isPalindrome("ad", offByN));
+        assertTrue(palindrome.isPalindrome("a", offByN));
+        assertTrue(palindrome.isPalindrome("add", offByN));
+        assertFalse(palindrome.isPalindrome("aa", offByN));
+    }
+
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests("all", TestPalindrome.class);
     }
