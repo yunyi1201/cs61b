@@ -1,7 +1,7 @@
-public class LinkedListDeque<item> implements Deque<item> {
+public class LinkedListDeque<Item> implements Deque<Item> {
 
     private class Node {
-        private item item;
+        private Item item;
         private Node prev;
         private Node succ;
     }
@@ -16,7 +16,7 @@ public class LinkedListDeque<item> implements Deque<item> {
     }
 
     @Override
-    public void addFirst(item x) {
+    public void addFirst(Item x) {
         Node temp = new Node();
         temp.item = x;
         Node prev = this.dummy;
@@ -31,7 +31,7 @@ public class LinkedListDeque<item> implements Deque<item> {
     }
 
     @Override
-    public void addLast(item x) {
+    public void addLast(Item x) {
         Node temp = new Node();
         temp.item = x;
         Node prev = this.dummy.prev;
@@ -63,13 +63,13 @@ public class LinkedListDeque<item> implements Deque<item> {
     }
 
     @Override
-    public item removeFirst() {
+    public Item removeFirst() {
         if (this.isEmpty()) {
             return null;
         } 
         this.size -= 1;
         Node deleteNode = this.dummy.succ;
-        item returnValue = deleteNode.item;
+        Item returnValue = deleteNode.item;
         Node prev = deleteNode.prev;
         Node succ = deleteNode.succ;
         
@@ -79,13 +79,13 @@ public class LinkedListDeque<item> implements Deque<item> {
     }
 
     @Override
-    public item removeLast() {
+    public Item removeLast() {
         if (this.isEmpty()) {
             return null;
         }
         this.size -= 1;
         Node deleteNode = this.dummy.prev;
-        item returnValue = deleteNode.item;
+        Item returnValue = deleteNode.item;
         Node prev = deleteNode.succ;
         Node succ = deleteNode.prev;
         
@@ -95,11 +95,11 @@ public class LinkedListDeque<item> implements Deque<item> {
     }
     
     @Override
-    public item get(int index) {
+    public Item get(int index) {
         if (index >= this.size()) {
             return null;
         }
-        item returnValue;
+        Item returnValue;
         if (index < this.size() / 2) {
             Node start = this.dummy.succ;
             while(index > 0) {
@@ -119,7 +119,7 @@ public class LinkedListDeque<item> implements Deque<item> {
         return returnValue;
     }
 
-    private item getRecursiveHelper(Node n, int index) {
+    private Item getRecursiveHelper(Node n, int index) {
         if (index == 0) {
             return n.item;
         } else {
@@ -127,7 +127,7 @@ public class LinkedListDeque<item> implements Deque<item> {
         }
     }
 
-    public item getRecursive(int index) {
+    public Item getRecursive(int index) {
         if (index == 0) {
             return this.dummy.succ.item;
         }

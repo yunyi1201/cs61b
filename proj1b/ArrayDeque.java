@@ -1,6 +1,6 @@
-public class ArrayDeque<item> implements Deque<item> {
+public class ArrayDeque<Item> implements Deque<Item> {
 
-    private item[] item;
+    private Item[] item;
     private static final int defaultCapacity = 8;
     private int head;
     private int tail;    
@@ -8,13 +8,13 @@ public class ArrayDeque<item> implements Deque<item> {
     private int capacity;
 
     public ArrayDeque() {
-        item = (item []) new Object[defaultCapacity];
+        item = (Item []) new Object[defaultCapacity];
         capacity = defaultCapacity;
         size = head = tail = 0;
     }
 
     private void doublesize(int resize) {
-        item[] temp = (item []) new Object[resize];
+        Item[] temp = (Item []) new Object[resize];
         int p = (tail + 1) % capacity;
         int n = capacity;
         int r = n - p;
@@ -27,7 +27,7 @@ public class ArrayDeque<item> implements Deque<item> {
     }
 
     private void downsize(int resize) {
-        item[] temp = (item []) new Object[resize];
+        Item[] temp = (Item []) new Object[resize];
         int oldCapacity = capacity;
         capacity = resize;
         if (tail < head) {
@@ -44,7 +44,7 @@ public class ArrayDeque<item> implements Deque<item> {
 
     /* actual capacity = capacity - 1 */
     @Override
-    public void addFirst(item x) {
+    public void addFirst(Item x) {
         if (size == capacity - 1) {
             doublesize(capacity * 2);
         } 
@@ -57,7 +57,7 @@ public class ArrayDeque<item> implements Deque<item> {
     }
 
     @Override
-    public void addLast(item x) {
+    public void addLast(Item x) {
         if (size == capacity - 1) {
             doublesize(capacity * 2);
         }
@@ -89,12 +89,12 @@ public class ArrayDeque<item> implements Deque<item> {
     }
     
     @Override
-    public item removeFirst() {
+    public Item removeFirst() {
         if (isEmpty()) {
             return null;
         }
         head = (head - 1 + capacity) % capacity;
-        item res = item[head];
+        Item res = item[head];
         item[head] = null; 
         size -= 1;
         
@@ -107,12 +107,12 @@ public class ArrayDeque<item> implements Deque<item> {
     }
 
     @Override
-    public item removeLast() {
+    public Item removeLast() {
         if (isEmpty()) {
             return null;
         }
         tail = (tail + 1) % capacity;
-        item res = item[tail];
+        Item res = item[tail];
         item[tail] = null;
         size -= 1;
 
@@ -125,7 +125,7 @@ public class ArrayDeque<item> implements Deque<item> {
     }
 
     @Override
-    public item get(int index) {
+    public Item get(int index) {
         if (index >= size) {
             return null;    
         }
