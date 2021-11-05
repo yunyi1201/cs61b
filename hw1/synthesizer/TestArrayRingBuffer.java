@@ -1,5 +1,4 @@
 package synthesizer;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -28,7 +27,7 @@ public class TestArrayRingBuffer {
 
     @Test
     public void TestArrayRingBufferIterator() {
-        AbstractBoundeQueue<Integer> arb = new ArrayRingBuffer<>(10);
+        AbstractBoundedQueue<Integer> arb = new ArrayRingBuffer<>(10);
         arb.enqueue(1);
         arb.enqueue(2);
         arb.enqueue(3);
