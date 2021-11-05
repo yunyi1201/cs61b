@@ -125,7 +125,7 @@ public class IntList {
             return A;
         }
         IntList head = reverse(A.rest);
-        head.rest = A;
+        A.rest.rest = A;
         A.rest = null;
         return head;
     }
