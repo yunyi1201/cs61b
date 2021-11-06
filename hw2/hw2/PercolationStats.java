@@ -30,20 +30,18 @@ public class PercolationStats {
 
     /** sample mean of percolation threshold */
     public double mean() {
-        int sum = 0;
-        for (int i : res) {
-            sum += i;
-        }
-        return (double) sum / T;
+        return StdStats.mean(res);
     }
 
     /** sample standard deviation of percolation threshold */
     public double stddev() {
+        /**
         int sum = 0;
         for (int i : res) {
             sum += (i - mean()) * (i - mean());
         }
-        return (double) sum / (T - 1);
+         */
+        return StdStats.stddev(res);
     }
 
     /** low endpoint of 95% confidence interval */
