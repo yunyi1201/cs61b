@@ -6,7 +6,7 @@ public class Percolation {
 
     private boolean [][]grids;
     private int numberOfOpen;
-    private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF uf, uuf;
     private int virtualTop, virtualBottom;
     /** create N-by-N grid with all sites initially blocked */
     /** N must be larger than 0 else, throw java.lang.IllegalArgumentException */
@@ -17,6 +17,7 @@ public class Percolation {
         }
         /** N * N represent virtual bottom site, N * N + 1 represent virtual top site*/
         uf = new WeightedQuickUnionUF(N * N + 2);
+        uuf = new WeightedQuickUnionUF(N * N + 1);
         virtualBottom = N * N;
         virtualTop = N * N + 1;
         grids = new boolean[N][N];
@@ -45,6 +46,7 @@ public class Percolation {
         try {
             if (isOpen(row, col)) {
                 uf.union(xyTo1D(row, col), current);
+                uuf.union(xyTo1D(row, col), current);
             }
         }
         catch (Exception IndexOutOfBoundsException) {
@@ -67,6 +69,7 @@ public class Percolation {
 
         if (row == 0) {
             uf.union(xyTo1D(row, col), virtualTop);
+            uuf.union(xyTo1D(row, col), virtualTop);
         }
 
         if (row == N - 1) {
@@ -93,7 +96,7 @@ public class Percolation {
         if (!isValidIndex(row) || !isValidIndex(col)) {
             throw new java.lang.IndexOutOfBoundsException();
         }
-        return uf.connected(xyTo1D(row, col), virtualTop);
+        return uuf.connected(xyTo1D(row, col), virtualTop);
     }
 
     /** number of open sites */
