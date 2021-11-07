@@ -35,12 +35,6 @@ public class PercolationStats {
 
     /** sample standard deviation of percolation threshold */
     public double stddev() {
-        /**
-        int sum = 0;
-        for (int i : res) {
-            sum += (i - mean()) * (i - mean());
-        }
-         */
         return StdStats.stddev(res);
     }
 

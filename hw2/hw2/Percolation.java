@@ -18,8 +18,8 @@ public class Percolation {
         /** N * N represent virtual bottom site, N * N + 1 represent virtual top site*/
         uf = new WeightedQuickUnionUF(N * N + 2);
         uuf = new WeightedQuickUnionUF(N * N + 1);
-        virtualBottom = N * N;
-        virtualTop = N * N + 1;
+        virtualBottom = N * N + 1;
+        virtualTop = N * N;
         grids = new boolean[N][N];
         for(int row = 0; row < N; row += 1) {
             for(int col = 0; col < N; col += 1)
