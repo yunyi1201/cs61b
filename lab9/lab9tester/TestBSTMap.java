@@ -2,6 +2,7 @@ package lab9tester;
 
 import static org.junit.Assert.*;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import lab9.BSTMap;
 
@@ -85,6 +86,28 @@ public class TestBSTMap {
         assertTrue(b.containsKey("hi"));
         assertTrue(b.get("hi") != null);
     }
+
+    @Test
+    public void sanityKeySet() {
+        BSTMap<String, Integer> bm = new BSTMap<String, Integer>();
+        for (int i = 0; i < 14; i += 1) {
+            bm.put("hi" + i, i);
+        }
+        System.out.println(bm.keySet());
+    }
+
+    @Test
+    public void sanityRemove() {
+        BSTMap<String, Integer> bm = new BSTMap<>();
+        for (int i = 0; i < 10; i += 1) {
+            bm.put("hi" + i, i);
+        }
+        assertEquals(1, (int)bm.remove("hi1"));
+        assertFalse(bm.containsKey("hi1"));
+        bm.put("hi1", 1);
+        assertEquals(1, (int)bm.get("hi1"));
+    }
+
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);
