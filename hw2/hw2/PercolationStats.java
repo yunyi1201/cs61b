@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class PercolationStats {
 
-    private int[] res;
+    private int N;
+    private double[] res;
     private int T;
-    private Random random = new Random();
 
     /** perform T independent experiments on an N-by-N grid */
     /** N, T must be larger than 0 */
@@ -17,15 +17,25 @@ public class PercolationStats {
         if (N <= 0 || T <= 0) {
             throw new java.lang.IllegalArgumentException();
         }
-        res = new int[T];
+        res = new double[T];
+        this.N = N;
         this.T = T;
         for (int i = 0; i < T; i++) {
             Percolation tmpTest = pf.make(N);
             while (!tmpTest.percolates()) {
-                tmpTest.open(random.nextInt(N), random.nextInt(N));
+               int site = pickRandomSite(tmpTest);
+               tmpTest.open(site / N, site % N);
             }
-            res[i] = tmpTest.numberOfOpenSites();
+            res[i] = tmpTest.numberOfOpenSites() * 1.0 / (N * N);
         }
+    }
+
+    private int pickRandomSite(Percolation p) {
+        int site = StdRandom.uniform(0, N*N);
+        while (p.isOpen(site / N, site % N)) {
+            site = StdRandom.uniform(0, N * N);
+        }
+        return site;
     }
 
     /** sample mean of percolation threshold */
@@ -40,12 +50,12 @@ public class PercolationStats {
 
     /** low endpoint of 95% confidence interval */
     public double confidenceLow() {
-        return mean() - 1.96 * Math.sqrt(stddev() / T);
+        return mean() - 1.96 * stddev() / Math.sqrt(T);
     }
 
     /** high endpoint of 95% confidence interval */
     public double confidenceHigh() {
-        return mean() + 1.96 * Math.sqrt(stddev() / T);
+        return mean() + 1.96 * stddev() / Math.sqrt(T);
     }
 
 }
