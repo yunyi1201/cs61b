@@ -46,6 +46,8 @@ public class Board implements WorldState{
         return boards.length;
     }
 
+    /** @source: Hug's solution.
+     **/
     @Override
     public Iterable<WorldState> neighbors() {
         Queue<WorldState> neighbors = new Queue<>();
@@ -137,5 +139,9 @@ public class Board implements WorldState{
             }
         }
         return false;
+    }
+
+    public int hashCode() {
+        return 1;
     }
 }
